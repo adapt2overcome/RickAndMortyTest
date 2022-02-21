@@ -1,5 +1,5 @@
-import { ICharacter } from "../hooks/useGetCharacters";
-import { CharacterCard } from "./CharacterCard";
+import { ICharacter } from "../../hooks/useGetCharacters";
+import { CharacterCard } from "../CharacterCard/CharacterCard";
 
 interface ICharacterAlbum {
   characters: ICharacter[];
@@ -30,11 +30,11 @@ export default function CharacterAlbum({
             );
           })}
         {!hasMore ? (
-          <p>No more characters</p>
+          <p data-testid="no-more-characters">No more characters</p>
         ) : loading ? (
-          <p>Loading</p>
+          <p data-testid="loading">Loading</p>
         ) : (
-          error && <p>Error</p>
+          error && <p data-testid="error">Error</p>
         )}
       </div>
     </div>

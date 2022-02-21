@@ -25,7 +25,7 @@ export default function FloatingFilters({
   }, []);
 
   return (
-    <div className={`container mt-2 sticky-menu`}>
+    <div className="container mt-2 sticky-menu">
       <div className={menuColor}>
         <div className="row">
           <div className="col-sm align-items-center align-self-center">

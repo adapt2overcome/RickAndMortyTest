@@ -61,6 +61,7 @@ export function useGetCharacters() {
     axiosInstance
       .get(query)
       .then((response: AxiosResponse) => {
+        console.log(response);
         //get the character data
         const charactersData = response.data.results;
         //if the last batch we got had less then 20 characters, there is no more characters to fetch
@@ -80,7 +81,7 @@ export function useGetCharacters() {
       });
   };
 
-  //this useeffect is similar to the fetchCharacters(), we use this one when user scrolls to the end of the page and needs more content
+  //this useeffect is similar to the fetchCharacters(), we use this one when user changes search query or changes category
   useEffect(() => {
     if (dataState.loading) return;
     setDataState({ ...dataState, hasMore: true });
