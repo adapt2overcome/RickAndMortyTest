@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
-
 import CharacterAlbum from "./components/CharacterAlbum/CharacterAlbum";
-import FloatingFilters from "./components/FloatingFilters";
+import FloatingFilters from "./components/FloatingFilters/FloatingFilters";
 import NavBar from "./components/NavBar";
 import { useGetCharacters } from "./hooks/useGetCharacters";
 

@@ -1,8 +1,11 @@
-import ReactDOM from "react-dom";
 import App from "./App";
+import { render } from "@testing-library/react";
 
-it("App renders without crashing", async () => {
-  const div = await document.createElement("div");
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+it("App renders without crashing nad renders list element after axios fetch", async () => {
+  const mainContainer = render(<App />);
+
+  const firstAlbumCharacter = await mainContainer.findByTestId(
+    "card-list-element-1"
+  );
+  expect(firstAlbumCharacter).toBeInTheDocument();
 });

@@ -23,6 +23,7 @@ export default function CharacterAlbum({
             return (
               <CharacterCard
                 key={characterIndex}
+                id={characterIndex}
                 imageURL={character.image}
                 characterName={character.name}
                 status={character.status}

@@ -1,16 +1,17 @@
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { CharacterCard } from "../CharacterCard";
 
 test("are image and texts being rendered right", () => {
   const component = render(
     <CharacterCard
+      id={1}
       imageURL="https://rickandmortyapi.com/api/character/avatar/2.jpeg"
       characterName="Morty Smith"
       status="Alive"
     />
   );
-  const mainContainer = component.queryByTestId("card-list-element");
+  const mainContainer = component.queryByTestId("card-list-element-1");
   expect(mainContainer).toBeInTheDocument();
   const imageComponent = component.queryByTestId("card-image");
   expect(imageComponent).toHaveAttribute(

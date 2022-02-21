@@ -1,9 +1,9 @@
 import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api/axios";
-import { formulateURL } from "../helpers/functions";
+import { formulateURL } from "../helpers";
 
-interface ILication {
+interface ILocation {
   name: string;
   url: string;
 }
@@ -14,9 +14,9 @@ export interface ICharacter {
   episode: string[];
   gender: string;
   image: string;
-  location: ILication;
+  location: ILocation;
   name: string;
-  origin: ILication;
+  origin: ILocation;
   species: string;
   status: string;
   type: string;
