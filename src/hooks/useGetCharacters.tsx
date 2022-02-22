@@ -93,8 +93,6 @@ export function useGetCharacters() {
 
   //this useeffect is similar to the fetchCharacters(), we use this one when user changes search query or changes category
   useEffect(() => {
-    console.log("se poziva oov");
-    console.log("unutraa");
     if (dataState.loading) return;
     setDataState({ ...dataState, hasMore: true });
     const query = formulateURL(filters.searchQuery, filters.filterQuery, 1);
