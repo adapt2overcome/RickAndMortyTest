@@ -2,6 +2,7 @@ import { AxiosError, AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api/axios";
 import { formulateURL } from "../helpers";
+import { debounce } from "lodash";
 
 interface ILocation {
   name: string;
@@ -92,6 +93,8 @@ export function useGetCharacters() {
 
   //this useeffect is similar to the fetchCharacters(), we use this one when user changes search query or changes category
   useEffect(() => {
+    console.log("se poziva oov");
+    console.log("unutraa");
     if (dataState.loading) return;
     setDataState({ ...dataState, hasMore: true });
     const query = formulateURL(filters.searchQuery, filters.filterQuery, 1);
@@ -109,9 +112,13 @@ export function useGetCharacters() {
       });
   }, [filters.filterQuery, filters.searchQuery]);
 
+  const debounceChangeSearchValue = debounce((query: string) => {
+    setFilters({ ...filters, searchQuery: query });
+  }, 300);
+
   //handles search by name
   function handleChangeSearchQuery(query: string) {
-    setFilters({ ...filters, searchQuery: query });
+    debounceChangeSearchValue(query);
   }
 
   //handles filter change
