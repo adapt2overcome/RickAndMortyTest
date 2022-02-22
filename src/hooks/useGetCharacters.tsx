@@ -25,9 +25,12 @@ export interface ICharacter {
 
 interface IData {
   characters: ICharacter[];
+  page: number;
+}
+
+interface IFilters {
   searchQuery: string;
   filterQuery: string;
-  page: number;
 }
 
 interface IStateData {
@@ -37,10 +40,13 @@ interface IStateData {
 }
 
 export function useGetCharacters() {
-  const [data, setData] = useState<IData>({
-    characters: [],
+  const [filters, setFilters] = useState<IFilters>({
     searchQuery: "",
     filterQuery: "all",
+  });
+
+  const [data, setData] = useState<IData>({
+    characters: [],
     page: 1,
   });
 
@@ -57,11 +63,14 @@ export function useGetCharacters() {
     setDataState({ ...dataState, loading: true, error: false, hasMore: true });
     //making the query from the data parametars we have
     //we are making new reuqest with new parametars so we need to get the first page with the filtered content
-    const query = formulateURL(data.searchQuery, data.filterQuery, data.page);
+    const query = formulateURL(
+      filters.searchQuery,
+      filters.filterQuery,
+      data.page
+    );
     axiosInstance
       .get(query)
       .then((response: AxiosResponse) => {
-        console.log(response);
         //get the character data
         const charactersData = response.data.results;
         //if the last batch we got had less then 20 characters, there is no more characters to fetch
@@ -85,7 +94,7 @@ export function useGetCharacters() {
   useEffect(() => {
     if (dataState.loading) return;
     setDataState({ ...dataState, hasMore: true });
-    const query = formulateURL(data.searchQuery, data.filterQuery, 1);
+    const query = formulateURL(filters.searchQuery, filters.filterQuery, 1);
     axiosInstance
       .get(query)
       .then((response: AxiosResponse) => {
@@ -98,20 +107,21 @@ export function useGetCharacters() {
         setDataState({ loading: false, hasMore: false, error: true });
         setData({ ...data, characters: [] });
       });
-  }, [data.searchQuery, data.filterQuery]);
+  }, [filters.filterQuery, filters.searchQuery]);
 
   //handles search by name
   function handleChangeSearchQuery(query: string) {
-    setData({ ...data, searchQuery: query });
+    setFilters({ ...filters, searchQuery: query });
   }
 
   //handles filter change
   function handleChangeFilterQuery(query: string) {
-    setData({ ...data, filterQuery: query });
+    setFilters({ ...filters, filterQuery: query });
   }
 
   return {
     data,
+    filters,
     fetchCharacters,
     handleChangeSearchQuery,
     handleChangeFilterQuery,

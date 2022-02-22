@@ -7,23 +7,6 @@
   pointer-events: none;
 }
 
-.navbar-logo {
-  width: 60px;
-  height: 60px;
-}
-.max-size-search {
-  max-width: 300px;
-}
-.sticky-menu {
-  position: sticky !important;
-  z-index: 10;
-  top: 10px;
-}
-
-.menu-transparent {
-  background-color: #00000077;
-}
-
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

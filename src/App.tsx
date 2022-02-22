@@ -1,66 +1,6 @@
-import React, { useEffect } from "react";
 import "./App.css";
-import CharacterAlbum from "./components/CharacterAlbum/CharacterAlbum";
-import FloatingFilters from "./components/FloatingFilters/FloatingFilters";
-import NavBar from "./components/NavBar";
-import { useGetCharacters } from "./hooks/useGetCharacters";
+import Home from "./containers/Home";
 
 export default function App() {
-  const {
-    data,
-    fetchCharacters,
-    handleChangeSearchQuery,
-    handleChangeFilterQuery,
-    dataState,
-  } = useGetCharacters();
-
-  function handleSearch(e: React.FormEvent<HTMLInputElement>) {
-    window.scrollTo({
-      top: 0,
-    });
-    handleChangeSearchQuery(e.currentTarget.value);
-  }
-
-  function handleRadioButtonChange(e: React.FormEvent<HTMLInputElement>) {
-    window.scrollTo({
-      top: 0,
-    });
-    handleChangeFilterQuery(e.currentTarget.id);
-  }
-
-  useEffect(() => {
-    fetchCharacters();
-  }, []);
-
-  useEffect(() => {
-    const onScrollFetch = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight - 10
-      ) {
-        console.log(dataState.hasMore);
-        if (dataState.hasMore) fetchCharacters();
-      }
-    };
-
-    window.addEventListener("scroll", onScrollFetch);
-    return () => window.removeEventListener("scroll", onScrollFetch);
-  }, [fetchCharacters]);
-
-  return (
-    <div data-testid={"main-container"} className="App">
-      <NavBar />
-      <FloatingFilters
-        filterQuery={data.filterQuery}
-        handleRadioButtonChange={handleRadioButtonChange}
-        handleSearch={handleSearch}
-      />
-      <CharacterAlbum
-        characters={data.characters}
-        hasMore={dataState.hasMore}
-        loading={dataState.loading}
-        error={dataState.error}
-      />
-    </div>
-  );
+  return <Home />;
 }

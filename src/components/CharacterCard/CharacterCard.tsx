@@ -16,7 +16,7 @@ export function CharacterCard({
   return (
     <div
       data-testid={`card-list-element-${id}`}
-      className="col-12 col-sm-6 col-md-4 p-4 col-lg-3"
+      className="col-12 col-sm-6 col-md-4 p-4 col-lg-3 card-hover"
     >
       <div className="card">
         <img
