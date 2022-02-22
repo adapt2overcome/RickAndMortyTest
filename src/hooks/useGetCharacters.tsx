@@ -1,4 +1,4 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../api/axios";
 import { formulateURL } from "../helpers";
@@ -85,7 +85,7 @@ export function useGetCharacters() {
           page: data.page + 1,
         });
       })
-      .catch((error: AxiosError) => {
+      .catch(() => {
         //if something went wrong with the request we set state to reflect on the error
         setDataState({ loading: false, hasMore: false, error: true });
       });
@@ -104,7 +104,7 @@ export function useGetCharacters() {
         setData({ ...data, characters: [...charactersData], page: 2 });
         setDataState({ ...dataState, loading: false, hasMore: !lastBatch });
       })
-      .catch((error: AxiosError) => {
+      .catch(() => {
         setDataState({ loading: false, hasMore: false, error: true });
         setData({ ...data, characters: [] });
       });

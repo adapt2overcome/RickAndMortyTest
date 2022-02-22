@@ -13,14 +13,13 @@ export default function FloatingFilters({
 }: IFloatingFilters) {
   const [menuColor, setMenuColor] = useState("p-3 bg-dark rounded");
 
-  const onScrollChangeColor = () => {
-    if (window.pageYOffset > 70) setMenuColor("p-3 menu-transparent rounded");
-    else setMenuColor(`p-3 bg-dark rounded`);
-    window.addEventListener("scroll", onScrollChangeColor);
-    return () => window.removeEventListener("scroll", onScrollChangeColor);
-  };
-
   useEffect(() => {
+    const onScrollChangeColor = () => {
+      if (window.pageYOffset > 70) setMenuColor("p-3 menu-transparent rounded");
+      else setMenuColor(`p-3 bg-dark rounded`);
+      window.addEventListener("scroll", onScrollChangeColor);
+      return () => window.removeEventListener("scroll", onScrollChangeColor);
+    };
     onScrollChangeColor();
   }, []);
 

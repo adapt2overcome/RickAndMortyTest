@@ -29,12 +29,12 @@ export default function Home() {
     handleChangeFilterQuery(e.currentTarget.id);
   }
 
-  const test = useCallback(() => {
+  const fetchCallback = useCallback(() => {
     fetchCharacters();
   }, [fetchCharacters]);
 
   useEffect(() => {
-    test();
+    fetchCallback();
   }, []);
 
   useEffect(() => {
